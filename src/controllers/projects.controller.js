@@ -44,7 +44,18 @@ const createProject = async (req, res) => {
 }
 
 const updateProject = async (req, res) => {
+  const projectRoute = req.params.project
+  const { title, description } = req.body
 
+  const result = await pool
+    .query(`
+      UPDATE projects
+      SET title = $1, description = $2
+      WHERE route = $3
+      RETURNING *
+    `, [title, description, projectRoute])
+
+  res.json(result.rows[0])
 }
 
 const deleteProject = async (req, res) => {

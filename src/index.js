@@ -4,6 +4,7 @@ const cors = require('cors')
 
 const projectRouter = require('./routes/projects.routes')
 
+const { errorHandler, unknownEndpoint } = require('./utils/middleware')
 
 const app = express()
 
@@ -12,6 +13,9 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/api/issues/', projectRouter)
+
+app.use(unknownEndpoint)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
