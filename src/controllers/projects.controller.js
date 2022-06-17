@@ -12,17 +12,29 @@ const getProject = async (req, res) => {
   const projectRoute = req.params.project
 
   try {
-    const result = await pool
+    const projectQuery = await pool
       .query(`
         SELECT * FROM projects
         WHERE route = $1
       `, [projectRoute])
 
-    if (result.rows.length === 0) {
+    if (projectQuery.rows.length === 0) {
       return res.status(404).end()
     }
 
-    res.json(result.rows[0])
+    projectObj = projectQuery.rows[0]
+
+    const ticketQuery = await pool
+      .query(`
+        SELECT * FROM tickets
+        WHERE project_id = 
+        (SELECT id FROM projects WHERE route = $1)
+      `, [projectRoute])
+
+
+    projectObj.tickets = ticketQuery.rows
+
+    res.json(projectObj)
   } catch (error) {
     res.json(error)
   }
