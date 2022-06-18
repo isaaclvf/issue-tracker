@@ -3,8 +3,9 @@ const morgan = require('morgan')
 const cors = require('cors')
 
 const projectRouter = require('./routes/projects.routes')
+const usersRouter = require('./routes/users.routes')
 
-const { errorHandler, unknownEndpoint } = require('./utils/middleware')
+const middleware = require('./utils/middleware')
 
 const app = express()
 
@@ -13,9 +14,11 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/api/issues/', projectRouter)
+app.use('/api/users', usersRouter)
+// app.use('/api/login/')
 
-app.use(unknownEndpoint)
-app.use(errorHandler)
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
