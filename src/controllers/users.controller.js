@@ -30,6 +30,19 @@ const createUser = async (req, res) => {
   res.status(201).json(result.rows[0])
 }
 
+const getUser = async (req, res) => {
+  const username = req.params.username
+  const userQuery = await pool
+    .query(`
+      SELECT * FROM users
+      WHERE username = $1
+    `, [username])
+
+  const userObj = userQuery.rows[0]
+  res.json(userObj)
+}
+
 module.exports = {
   createUser,
+  getUser,
 }

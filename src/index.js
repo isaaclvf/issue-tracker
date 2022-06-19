@@ -4,6 +4,7 @@ const cors = require('cors')
 
 const projectRouter = require('./routes/projects.routes')
 const usersRouter = require('./routes/users.routes')
+const loginRouter = require('./routes/login.routes')
 
 const middleware = require('./utils/middleware')
 
@@ -14,8 +15,8 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/api/issues/', projectRouter)
-app.use('/api/users', usersRouter)
-// app.use('/api/login/')
+app.use('/api/users/', usersRouter)
+app.use('/api/login/', loginRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
