@@ -126,6 +126,10 @@ const getSubmissions = async (req, res) => {
       )
     `, [username])
 
+  if (ticketsQuery.rowCount === 0) {
+    return res.status(404).end()
+  }
+
   res.json(ticketsQuery.rows)
 }
 
@@ -142,6 +146,10 @@ const getAssignments = async (req, res) => {
         )
       )
     `, [username])
+
+  if (ticketsQuery.rowCount === 0) {
+    return res.status(404).end()
+  }
 
   res.json(ticketsQuery.rows)
 }
