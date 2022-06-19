@@ -131,6 +131,19 @@ const getSubmissions = async (req, res) => {
 
 const getAssignments = async (req, res) => {
   const username = req.params.user
+
+  const ticketsQuery = await pool
+    .query(`
+      SELECT * FROM tickets WHERE id in
+      (
+        SELECT ticket_id FROM assigned_to WHERE user_id = 
+        (
+          SELECT id FROM users WHERE username = $1
+        )
+      )
+    `, [username])
+
+  res.json(ticketsQuery.rows)
 }
 
 module.exports = {
