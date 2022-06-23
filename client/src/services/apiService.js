@@ -14,4 +14,19 @@ const createUser = async (userObj) => {
   return parsedJSON
 }
 
-export default { createUser }
+const login = async (userObj) => {
+
+  const response = await fetch('http://localhost:3001/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userObj)
+  })
+
+  const parsedResponse = await response.json()
+
+  return parsedResponse
+}
+
+export default { createUser, login }

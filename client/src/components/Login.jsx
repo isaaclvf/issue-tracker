@@ -21,6 +21,8 @@ export default function SignUp() {
       password: data.get('password'),
     }
 
+    const result = await apiService.login(userObj)
+    console.log(result)
   };
 
   return (
