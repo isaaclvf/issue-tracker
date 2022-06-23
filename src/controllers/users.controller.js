@@ -2,7 +2,7 @@ const pool = require('../db')
 const bcrypt = require('bcrypt')
 
 const createUser = async (req, res) => {
-  const { username, name, password, role, isAdmin } = req.body
+  const { username, name, password, role = 'developer', isAdmin = false } = req.body
 
   const existingUserQuery = await pool
     .query(`

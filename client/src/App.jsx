@@ -1,8 +1,10 @@
-import React from 'react'
+import SignUp from './components/SignUp'
 
 export default function App() {
   return (
-    <div>App</div>
+    <div>
+      <SignUp/>
+    </div>
   )
 }
 
