@@ -17,13 +17,10 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
 
     const userObj = {
-      name: data.get('name'),
       username: data.get('username'),
       password: data.get('password'),
     }
 
-    const result = await apiService.createUser(userObj)
-    console.log(result)
   };
 
   return (
@@ -39,21 +36,10 @@ export default function SignUp() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign up
+            Login
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="name"
-                  required
-                  fullWidth
-                  id="name"
-                  label="Name"
-                  autoFocus
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -82,7 +68,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Login
             </Button>
           </Box>
         </Box>
