@@ -7,11 +7,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import apiService from '../services/apiService'
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -21,7 +22,8 @@ export default function SignUp() {
       password: data.get('password'),
     }
 
-    console.log(userObj);
+    const result = await apiService.createUser(userObj)
+    console.log(result)
   };
 
   return (
