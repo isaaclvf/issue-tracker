@@ -11,7 +11,7 @@ import apiService from '../services/apiService'
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function Login({ handleToken }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -22,7 +22,7 @@ export default function SignUp() {
     }
 
     const result = await apiService.login(userObj)
-    console.log(result)
+    handleToken(result.token)
   };
 
   return (
