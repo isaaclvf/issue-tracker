@@ -11,6 +11,7 @@ import { Typography } from '@mui/material';
 import navbarItems from './navbarItems';
 import Box from '@mui/material/Box'
 import logo from '../assets/logo192.png'
+import Button from '@mui/material/Button'
 
 const drawerWidth = 240;
 
@@ -24,6 +25,8 @@ const Navbar = () => {
             width: drawerWidth,
             boxSizing: 'border-box',
           },
+          display: 'flex',
+          flexDirection: 'column',
         }}
         variant="permanent"
         anchor="left"
@@ -65,7 +68,7 @@ const Navbar = () => {
                 }}
                 href={item.link}
               >
-                <ListItemButton>
+                <ListItemButton sx={{ width: '239px', padding: 'auto' }}>
                   <ListItemIcon>
                     {item.icon}
                   </ListItemIcon>
@@ -76,6 +79,22 @@ const Navbar = () => {
           ))}
         </List>
         <Divider />
+        
+        <Button
+          variant='outlined'
+          color='error'
+          sx={{
+            marginTop: 'auto',
+            mx: '1rem',
+            marginBottom: '1rem',
+          }}
+          onClick={() => { console.log('clicked logout') }}
+        >
+          <Typography>
+            Log out
+          </Typography>
+        </Button>
+       
       </Drawer>
       
   )

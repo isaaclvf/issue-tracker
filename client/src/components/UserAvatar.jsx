@@ -5,7 +5,9 @@ import { Button, Avatar, Box } from '@mui/material'
 const UserAvatar = ({ children }) => {
   return (
     <Box>
-      <Button>
+      <Button
+        onClick={() => { console.log('clicked user avatar') }}
+      >
         <Avatar
           sx={{ 
             width: 32, 

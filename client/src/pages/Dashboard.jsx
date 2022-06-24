@@ -14,10 +14,10 @@ const Dashboard = () => {
       <Box sx={{ display: 'flex' }}>
         <Navbar />
         <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+          component="main"
+          sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
-          <Toolbar />
+        <Toolbar />
           Hi
         </Box>  
       </Box>
