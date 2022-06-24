@@ -21,8 +21,7 @@ export default function Login({ handleToken }) {
       password: data.get('password'),
     }
 
-    const result = await apiService.login(userObj)
-    handleToken(result.token)
+    await apiService.login(userObj)
   };
 
   return (
