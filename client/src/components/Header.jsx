@@ -1,6 +1,7 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, Box } from '@mui/material'
+import { AppBar, Toolbar, Typography, Box, Avatar } from '@mui/material'
 import NotificationBell from './NotificationBell'
+import { deepPurple, lightGreen } from '@mui/material/colors'
 
 const Header = ({ drawerWidth }) => {
   const [open, setOpen] = React.useState(false)
@@ -30,14 +31,25 @@ const Header = ({ drawerWidth }) => {
           <Typography variant="h6" noWrap component="div">
             Hello, %name%!
           </Typography>
-          <Box>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
             <NotificationBell 
-              badgeContent={10}
               anchorEl={anchorEl}
               handleOpen={handleOpen}
               handleClose={handleClose}
               open={open}
             />
+            <Avatar
+              sx={{ 
+                width: 32, 
+                height: 32, 
+                bgcolor: lightGreen[500],
+              }}
+            >U</Avatar>
           </Box>
         </Toolbar>
       </AppBar>
