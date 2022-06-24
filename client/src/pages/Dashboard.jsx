@@ -17,7 +17,7 @@ const Dashboard = () => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            .
+            Hello, %name%!
           </Typography>
         </Toolbar>
       </AppBar>
