@@ -26,7 +26,12 @@ const login = async (userObj) => {
 
   const parsedResponse = await response.json()
 
-  return parsedResponse
+  localStorage.setItem('token', parsedResponse.token)
 }
 
-export default { createUser, login }
+const apiService = {
+  createUser,
+  login
+}
+
+export default apiService
