@@ -11,8 +11,8 @@ export default function BasicMenu({ anchorEl, handleClose, open, menuItems }) {
         open={open}
         onClose={handleClose}
       >
-        {menuItems.map(item => {
-          return <MenuItem onClick={handleClose}>{item}</MenuItem>
+        {menuItems.map((item, index) => {
+          return <MenuItem key={index} onClick={handleClose}>{item}</MenuItem>
         })}
       </Menu>
     </div>
