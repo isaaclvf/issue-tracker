@@ -2,25 +2,15 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import Header from '../components/Header';
 
 const drawerWidth = 240;
 
 const Dashboard = () => {
   return (
     <CssBaseline>
-      <AppBar
-        position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Hello, %name%!
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header drawerWidth={drawerWidth}/>
       <Box sx={{ display: 'flex' }}>
         <Navbar />
         <Box
