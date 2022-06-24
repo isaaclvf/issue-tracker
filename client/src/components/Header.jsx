@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, Box, Avatar } from '@mui/material'
+import { AppBar, Toolbar, Typography, Box } from '@mui/material'
 import NotificationBell from './NotificationBell'
-import { deepPurple, lightGreen } from '@mui/material/colors'
+import UserAvatar from './UserAvatar'
 
 const Header = ({ drawerWidth }) => {
   const [open, setOpen] = React.useState(false)
@@ -43,13 +43,7 @@ const Header = ({ drawerWidth }) => {
               handleClose={handleClose}
               open={open}
             />
-            <Avatar
-              sx={{ 
-                width: 32, 
-                height: 32, 
-                bgcolor: lightGreen[500],
-              }}
-            >U</Avatar>
+            <UserAvatar />
           </Box>
         </Toolbar>
       </AppBar>
