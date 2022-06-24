@@ -43,7 +43,7 @@ const Header = ({ drawerWidth }) => {
               handleClose={handleClose}
               open={open}
             />
-            <UserAvatar />
+            <UserAvatar>D</UserAvatar>
           </Box>
         </Toolbar>
       </AppBar>

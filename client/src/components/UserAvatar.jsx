@@ -1,18 +1,22 @@
 import React from 'react'
 import { lightGreen } from '@mui/material/colors'
-import { Avatar } from '@mui/material'
+import { Button, Avatar, Box } from '@mui/material'
 
-const UserAvatar = () => {
+const UserAvatar = ({ children }) => {
   return (
-      <Avatar
-        sx={{ 
-          width: 32, 
-          height: 32, 
-          bgcolor: lightGreen[500],
-        }}
-      >
-        U
-      </Avatar>
+    <Box>
+      <Button>
+        <Avatar
+          sx={{ 
+            width: 32, 
+            height: 32, 
+            bgcolor: lightGreen[500],
+          }}
+        >
+          { children }
+        </Avatar>
+      </Button>
+    </Box>
   )
 }
 
