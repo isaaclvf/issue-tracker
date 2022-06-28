@@ -29,9 +29,14 @@ const login = async (userObj) => {
   localStorage.setItem('token', parsedResponse.token)
 }
 
+const logout = () => {
+  localStorage.clear()
+}
+
 const apiService = {
   createUser,
-  login
+  login,
+  logout
 }
 
 export default apiService

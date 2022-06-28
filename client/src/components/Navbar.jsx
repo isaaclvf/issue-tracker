@@ -9,9 +9,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Typography } from '@mui/material';
 import navbarItems from './navbarItems';
-import Box from '@mui/material/Box'
-import logo from '../assets/logo192.png'
-import Button from '@mui/material/Button'
+import LogoutDialog from './LogoutDialog';
 
 const drawerWidth = 240;
 
@@ -41,20 +39,11 @@ const Navbar = () => {
           }}
           href='/dashboard'
         >
-          <Box
-              component="img"
-              alt=''
-              src={logo}
-              sx={{
-                height: '60px',
-                width: '60px',
-                marginRight: '1rem',
-              }}
-            />
+
           <Typography
+            variant='h5'
           >
-            Issue <br/>
-            Tracker
+            Issue Tracker
           </Typography>
         </Link>
         <Divider />
@@ -79,24 +68,8 @@ const Navbar = () => {
           ))}
         </List>
         <Divider />
-        
-        <Button
-          variant='outlined'
-          color='error'
-          sx={{
-            marginTop: 'auto',
-            mx: '1rem',
-            marginBottom: '1rem',
-          }}
-          onClick={() => { console.log('clicked logout') }}
-        >
-          <Typography>
-            Log out
-          </Typography>
-        </Button>
-       
+        <LogoutDialog/>
       </Drawer>
-      
   )
 }
 
