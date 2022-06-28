@@ -8,10 +8,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import apiService from '../services/apiService'
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function Login({ handleToken }) {
+  const navigate = useNavigate()
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -21,7 +24,16 @@ export default function Login({ handleToken }) {
       password: data.get('password'),
     }
 
-    await apiService.login(userObj)
+    const result = await apiService.login(userObj)
+
+    if (result.error) {
+      // TODO: Add snackbar for printing the error
+      console.log(result.error) 
+      return
+    }
+
+    localStorage.setItem('token', result.token)
+    navigate('/dashboard')
   };
 
   return (

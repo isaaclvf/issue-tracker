@@ -26,7 +26,7 @@ const login = async (userObj) => {
 
   const parsedResponse = await response.json()
 
-  localStorage.setItem('token', parsedResponse.token)
+  return parsedResponse
 }
 
 const logout = () => {
