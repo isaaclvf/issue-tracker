@@ -5,9 +5,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import apiService from '../services/apiService';
 import Box from '@mui/material/Box'
+import { useNavigate } from 'react-router-dom';
 
 export default function LogoutDialog() {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,6 +21,7 @@ export default function LogoutDialog() {
 
   const handleLogout = () => {
     apiService.logout()
+    navigate('/login')
   }
 
   return (
