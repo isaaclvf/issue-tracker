@@ -8,10 +8,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import apiService from '../services/apiService'
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate()
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,7 +26,11 @@ export default function SignUp() {
     }
 
     const result = await apiService.createUser(userObj)
-    console.log(result)
+    console.log('created user', result)
+
+    const loginResult = await apiService.login(userObj)
+    localStorage.setItem('token', loginResult.token)
+    navigate('/dashboard')
   };
 
   return (

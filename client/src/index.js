@@ -4,7 +4,7 @@ import App from './App';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import SignUp from './routes/SignUp';
 import Login from './routes/Login';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './routes/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
