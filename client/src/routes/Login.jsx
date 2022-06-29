@@ -10,11 +10,20 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import apiService from '../services/apiService'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react';
 
 const theme = createTheme();
 
-export default function Login({ handleToken }) {
+export default function Login() {
   const navigate = useNavigate()
+
+  // Redirect if someone is already logged in
+  const token = localStorage.getItem('token')
+  useEffect(() => {
+    if (token) {
+      return navigate('/dashboard')
+    }
+  }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
