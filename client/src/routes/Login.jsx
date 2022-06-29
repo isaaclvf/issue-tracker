@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import apiService from '../services/apiService'
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -84,6 +85,7 @@ export default function Login({ handleToken }) {
               Login
             </Button>
           </Box>
+          <Link to="/signup">Don't have an account? Click here to sign up</Link>
         </Box>
       </Container>
     </ThemeProvider>
