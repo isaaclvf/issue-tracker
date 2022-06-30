@@ -23,6 +23,8 @@ const Dashboard = () => {
     }
   }, [])
 
+  const username = localStorage.getItem('name')
+
   // Get projects from backend
   const [projects, setProjects] = useState([]) 
   
@@ -44,9 +46,9 @@ const Dashboard = () => {
       }}>
         {matches => (
           <>
-            {matches.small && <Header drawerWidth={0} tmpbar={true}/>} 
-            {matches.medium && <Header drawerWidth={drawerWidth}/>} 
-            {matches.large && <Header drawerWidth={drawerWidth}/>} 
+            {matches.small && <Header drawerWidth={0} tmpbar={true} username={username} />} 
+            {matches.medium && <Header drawerWidth={drawerWidth} username={username} />} 
+            {matches.large && <Header drawerWidth={drawerWidth} username={username} />} 
           </>
         )}
       </Media>

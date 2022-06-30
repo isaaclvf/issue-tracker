@@ -43,6 +43,7 @@ export default function Login() {
     }
 
     localStorage.setItem('token', result.token)
+    localStorage.setItem('name', result.name)
     navigate('/dashboard')
   };
 

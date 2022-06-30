@@ -4,7 +4,7 @@ import NotificationBell from './NotificationBell'
 import UserAvatar from './UserAvatar'
 import TempNavbar from './TempNavbar'
 
-const Header = ({ drawerWidth, tmpbar = false }) => {
+const Header = ({ drawerWidth, tmpbar = false, username }) => {
   const [open, setOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -38,7 +38,7 @@ const Header = ({ drawerWidth, tmpbar = false }) => {
           >
             {tmpbar ? <TempNavbar /> : null}
             <Typography variant="h6" noWrap component="div">
-              Hello, %name%!
+              Hello, {username}
             </Typography>
           </Box>
           <Box
