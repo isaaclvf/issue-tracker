@@ -3,14 +3,33 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import apiService from '../services/apiService';
 import BasicTable from './BasicTable';
+import TicketCard from './TicketCard';
+
+const activeTicket = ({ tickets, handleClick}) => {
+  return (
+    <>
+      {
+        tickets.find()
+      }
+    </>
+  )
+}
 
 const ProjectPage = ({ project, handleClick }) => {
   const [tickets, setTickets] = React.useState([]) 
   
   const handleProject = async () => {
     const result = await apiService.getTickets(project)
-    console.log(result)
     setTickets(result)
+  }
+
+  const [openTicket, setOpenTicket] = React.useState({open: false, id: null})
+
+  const handleOpenTicket = (id = null) => {
+    setOpenTicket({
+      open: true,
+      id: id,
+    })
   }
 
   React.useEffect(() => {
@@ -30,7 +49,12 @@ const ProjectPage = ({ project, handleClick }) => {
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
         {project.description}
       </Typography>
-      <BasicTable rows={tickets}/>
+      <BasicTable rows={tickets} handleClick={handleOpenTicket} />
+      {
+        openTicket.open
+        ? <TicketCard ticket={tickets.find(t => t.id === openTicket.id)} />
+        : null
+      }
     </>
   )
 }

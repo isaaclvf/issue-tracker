@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 
-export default function BasicTable({ rows }) {
+export default function BasicTable({ rows, handleClick }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -36,7 +36,11 @@ export default function BasicTable({ rows }) {
             .map((row) => (
               <TableRow
                 key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                sx={{ 
+                  '&:last-child td, &:last-child th': { border: 0 }, 
+                  cursor: 'pointer',
+                }}
+                onClick={() => { handleClick(row.id) }}
                 tabIndex={-1}
               >
                 <TableCell component="th" scope="row">
