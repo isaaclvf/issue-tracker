@@ -16,7 +16,7 @@ const createUser = async (userObj) => {
 
 const login = async (userObj) => {
 
-  const response = await fetch('http://localhost:3001/api/login', {
+  const response = await fetch(`${baseUrl}/api/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -33,10 +33,21 @@ const logout = () => {
   localStorage.clear()
 }
 
+const getProjects = async () => {
+  const response = await fetch(`${baseUrl}/api/issues`, {
+    method: 'GET'
+  })
+
+  const parsedResponse = await response.json()
+
+  return parsedResponse
+}
+
 const apiService = {
   createUser,
   login,
-  logout
+  logout,
+  getProjects
 }
 
 export default apiService

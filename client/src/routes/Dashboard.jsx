@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Media from 'react-media';
-import TempNavbar from '../components/TempNavbar';
 
 const drawerWidth = 240;
 
