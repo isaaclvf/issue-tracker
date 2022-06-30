@@ -18,6 +18,8 @@ const Header = ({ drawerWidth, tmpbar = false, username }) => {
     setAnchorEl(null)
   }
 
+  const name = localStorage.getItem('name')
+
   return (
     <AppBar
         position="fixed"
@@ -53,7 +55,7 @@ const Header = ({ drawerWidth, tmpbar = false, username }) => {
               handleClose={handleClose}
               open={open}
             />
-            <UserAvatar>D</UserAvatar>
+            <UserAvatar>{name}</UserAvatar>
           </Box>
         </Toolbar>
       </AppBar>

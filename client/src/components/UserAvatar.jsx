@@ -15,7 +15,7 @@ const UserAvatar = ({ children }) => {
             bgcolor: lightGreen[500],
           }}
         >
-          { children }
+          { children[0] }
         </Avatar>
       </Button>
     </Box>
