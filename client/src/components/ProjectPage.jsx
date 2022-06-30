@@ -52,7 +52,10 @@ const ProjectPage = ({ project, handleClick }) => {
       <BasicTable rows={tickets} handleClick={handleOpenTicket} />
       {
         openTicket.open
-        ? <TicketCard ticket={tickets.find(t => t.id === openTicket.id)} />
+        ? <TicketCard 
+            projectTitle={project.title} 
+            ticketId={openTicket.id} 
+          />
         : null
       }
     </>

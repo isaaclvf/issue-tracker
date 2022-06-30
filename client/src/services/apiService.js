@@ -51,12 +51,22 @@ const getTickets = async (project) => {
   return parsedResponse.tickets
 }
 
+const getTicketInfo = async (projectTitle, ticketId) => {
+  const projectRoute = helpers.formatRoute(projectTitle)
+
+  const response = await fetch(`${baseUrl}/api/issues/${projectRoute}/${ticketId}`)
+  const parsedResponse = await response.json()
+
+  return parsedResponse
+}
+
 const apiService = {
   createUser,
   login,
   logout,
   getProjects,
   getTickets,
+  getTicketInfo,
 }
 
 export default apiService

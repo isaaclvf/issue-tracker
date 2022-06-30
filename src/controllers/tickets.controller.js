@@ -18,7 +18,7 @@ const getTicket = async (req, res) => {
   const ticket = ticketQuery.rows[0]
 
   const assignedUsersQuery = await pool.query(`
-    SELECT (username, name, role) FROM users WHERE id IN (
+    SELECT name, username, role FROM users WHERE id IN (
       SELECT user_id FROM assigned_to WHERE ticket_id = $1
     )
   `, [ticketId])
@@ -26,7 +26,7 @@ const getTicket = async (req, res) => {
   ticket.assignedUsers = assignedUsersQuery.rows
 
   const submittedByQuery = await pool.query(`
-    SELECT (username, name, role) FROM users WHERE id = (
+    SELECT name, username, role FROM users WHERE id = (
       SELECT user_id FROM submitted_by WHERE ticket_id = $1
     )
   `, [ticketId])

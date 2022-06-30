@@ -4,9 +4,21 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import apiService from '../services/apiService';
 
-export default function TicketCard({ ticket }) {
-  console.log(ticket)
+export default function TicketCard({ projectTitle, ticketId }) {
+  const [ticket, setTicket] = React.useState([])
+
+  const handleTicketInfo = async (projectTitle, ticketId) => {
+    const result = await apiService.getTicketInfo(projectTitle, ticketId)
+    console.log(result)
+    setTicket(result)
+  }
+
+  React.useEffect(() => { 
+    handleTicketInfo(projectTitle, ticketId)
+    console.log(ticketId)
+   }, [ticketId])
 
   return (
     <Card sx={{ 
