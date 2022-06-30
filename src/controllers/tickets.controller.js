@@ -5,17 +5,35 @@ const jwt = require('jsonwebtoken')
 const getTicket = async (req, res) => {
   const ticketId = req.params.id
 
-  const result = await pool
+  const ticketQuery = await pool
     .query(`
       SELECT * FROM tickets
       WHERE id = $1
     `, [ticketId])
 
-  if (result.rows.length === 0) {
+  if (ticketQuery.rows.length === 0) {
     return res.status(404).end()
   }
 
-  res.json(result.rows[0])
+  const ticket = ticketQuery.rows[0]
+
+  const assignedUsersQuery = await pool.query(`
+    SELECT (username, name, role) FROM users WHERE id IN (
+      SELECT user_id FROM assigned_to WHERE ticket_id = $1
+    )
+  `, [ticketId])
+
+  ticket.assignedUsers = assignedUsersQuery.rows
+
+  const submittedByQuery = await pool.query(`
+    SELECT (username, name, role) FROM users WHERE id = (
+      SELECT user_id FROM submitted_by WHERE ticket_id = $1
+    )
+  `, [ticketId])
+
+  ticket.submittedBy = submittedByQuery.rows[0]
+
+  res.json(ticket)
 }
 
 const createTicket = async (req, res) => {
