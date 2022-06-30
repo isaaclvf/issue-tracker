@@ -1,3 +1,5 @@
+import helpers from "./helpers"
+
 const baseUrl = 'http://localhost:3001'
 
 const createUser = async (userObj) => {
@@ -35,17 +37,26 @@ const logout = () => {
 
 const getProjects = async () => {
   const response = await fetch(`${baseUrl}/api/issues`)
-
   const parsedResponse = await response.json()
 
   return parsedResponse
+}
+
+const getTickets = async (project) => {
+  const projectRoute = helpers.formatRoute(project.title)
+
+  const response = await fetch(`${baseUrl}/api/issues/${projectRoute}`)
+  const parsedResponse = await response.json()
+
+  return parsedResponse.tickets
 }
 
 const apiService = {
   createUser,
   login,
   logout,
-  getProjects
+  getProjects,
+  getTickets,
 }
 
 export default apiService

@@ -21,6 +21,7 @@ export default function ProjectCard({ project, handleClick }) {
       </CardContent>
       <CardActions>
         <Button size="small"
+          variant='outlined'
           onClick={() => handleClick(project.id)}
         >
           More
