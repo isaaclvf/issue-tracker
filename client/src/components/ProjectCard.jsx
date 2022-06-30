@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, handleClick }) {
   return (
     <Card sx={{ minWidth: 275, marginBottom: '1rem' }}>
       <CardContent>
@@ -18,12 +18,13 @@ export default function ProjectCard({ project }) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {project.description}
         </Typography>
-        {/* <Typography variant="body2">
-          {project.description}
-        </Typography> */}
       </CardContent>
       <CardActions>
-        <Button size="small">More</Button>
+        <Button size="small"
+          onClick={() => handleClick(project.id)}
+        >
+          More
+        </Button>
       </CardActions>
     </Card>
   );
