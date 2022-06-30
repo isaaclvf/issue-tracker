@@ -31,7 +31,11 @@ export default function LogoutDialog() {
         width: '100%'
       }}
     >
-      <Button variant="outlined" color="error" onClick={handleClickOpen}>
+      <Button variant="outlined" color="error" onClick={handleClickOpen}
+        sx={{
+          width: '100%'
+        }}
+      >
         Logout
       </Button>
       <Dialog
