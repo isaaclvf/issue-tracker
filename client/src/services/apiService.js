@@ -34,9 +34,7 @@ const logout = () => {
 }
 
 const getProjects = async () => {
-  const response = await fetch(`${baseUrl}/api/issues`, {
-    method: 'GET'
-  })
+  const response = await fetch(`${baseUrl}/api/issues`)
 
   const parsedResponse = await response.json()
 
