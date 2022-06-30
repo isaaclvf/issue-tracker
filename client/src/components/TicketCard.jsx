@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import apiService from '../services/apiService';
+import BasicModal from './BasicModal';
 
 export default function TicketCard({ projectTitle, ticketId }) {
   const [ticket, setTicket] = React.useState([])
@@ -59,12 +60,23 @@ export default function TicketCard({ projectTitle, ticketId }) {
           {`Last updated: ${formatDate(ticket.updated_at)}`}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="medium"
+      <CardActions
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {/* <Button size="medium"
           variant='contained'
+          sx={{
+            marginTop: '1rem'
+          }}
         >
           Update
-        </Button>
+        </Button> */}
+        <BasicModal>
+          Update
+        </BasicModal>
       </CardActions>
     </Card>
   );
