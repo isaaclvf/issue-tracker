@@ -6,6 +6,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Header from '../components/Header';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Media from 'react-media';
+import TempNavbar from '../components/TempNavbar';
 
 const drawerWidth = 240;
 
@@ -22,9 +24,32 @@ const Dashboard = () => {
 
   return (
     <CssBaseline>
-      <Header drawerWidth={drawerWidth}/>
+      <Media queries={{
+          small: "(max-width: 599px)",
+          medium: "(min-width: 600px) and (max-width: 1199px)",
+          large: "(min-width: 1200px)"
+      }}>
+        {matches => (
+          <>
+            {matches.small && <Header drawerWidth={0} tmpbar={true}/>} 
+            {matches.medium && <Header drawerWidth={drawerWidth}/>} 
+            {matches.large && <Header drawerWidth={drawerWidth}/>} 
+          </>
+        )}
+      </Media>
       <Box sx={{ display: 'flex' }}>
-        <Navbar />
+      <Media queries={{
+          small: "(max-width: 599px)",
+          medium: "(min-width: 600px) and (max-width: 1199px)",
+          large: "(min-width: 1200px)"
+      }}>
+        {matches => (
+          <>
+            {matches.medium && <Navbar />} 
+            {matches.large && <Navbar />} 
+          </>
+        )}
+      </Media>
         <Box
           component="main"
           sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}

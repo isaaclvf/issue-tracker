@@ -2,8 +2,9 @@ import React from 'react'
 import { AppBar, Toolbar, Typography, Box } from '@mui/material'
 import NotificationBell from './NotificationBell'
 import UserAvatar from './UserAvatar'
+import TempNavbar from './TempNavbar'
 
-const Header = ({ drawerWidth }) => {
+const Header = ({ drawerWidth, tmpbar = false }) => {
   const [open, setOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -26,11 +27,20 @@ const Header = ({ drawerWidth }) => {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
+            padding: '0px'
           }}
         >
-          <Typography variant="h6" noWrap component="div">
-            Hello, %name%!
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            {tmpbar ? <TempNavbar /> : null}
+            <Typography variant="h6" noWrap component="div">
+              Hello, %name%!
+            </Typography>
+          </Box>
           <Box
             sx={{
               display: 'flex',
