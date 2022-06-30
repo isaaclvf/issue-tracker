@@ -11,14 +11,18 @@ export default function TicketCard({ projectTitle, ticketId }) {
 
   const handleTicketInfo = async (projectTitle, ticketId) => {
     const result = await apiService.getTicketInfo(projectTitle, ticketId)
-    console.log(result)
     setTicket(result)
   }
 
   React.useEffect(() => { 
     handleTicketInfo(projectTitle, ticketId)
-    console.log(ticketId)
    }, [ticketId])
+
+  const formatDate = (date) => {
+    const dateObj = new Date(date)
+    const dateStr = dateObj.toString()
+    return dateStr.slice(4, 21) // Only shows something like 'Jun 19 2022 16:03'
+  }
 
   return (
     <Card sx={{ 
@@ -33,10 +37,26 @@ export default function TicketCard({ projectTitle, ticketId }) {
           {ticket.title}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {ticket.open ? 'Open' : 'Closed'}
+          {ticket.open ? `Open ${ticket.type}` : `Closed ${ticket.type}`}
         </Typography>
         <Typography>
           {ticket.description}
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          Submitted by {ticket.submittedBy ? ticket.submittedBy.name : 'unknown'}
+          {', '} {formatDate(ticket.created_at)}
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="">
+          Assigned to {
+            ticket.assignedUsers 
+            ? ticket.assignedUsers.map(user => `${user.name} `) 
+            : 'nobody'}
+        </Typography>
+        <Typography>
+          {`Status: ${ticket.status_text}`}
+        </Typography>
+        <Typography>
+          {`Last updated: ${formatDate(ticket.updated_at)}`}
         </Typography>
       </CardContent>
       <CardActions>
