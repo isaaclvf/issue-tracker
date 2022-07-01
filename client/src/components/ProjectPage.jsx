@@ -5,7 +5,7 @@ import apiService from '../services/apiService';
 import BasicTable from './BasicTable';
 import TicketCard from './TicketCard';
 import { Box } from '@mui/material';
-import BasicModal from './BasicModal';
+import TicketModal from './TicketModal';
 
 const activeTicket = ({ tickets, handleClick}) => {
   return (
@@ -57,7 +57,7 @@ const ProjectPage = ({ project, handleClick }) => {
             {project.description}
           </Typography>
         </Box>
-        <BasicModal>Create new ticket</BasicModal>
+        <TicketModal>Create new ticket</TicketModal>
       </Box>
 
       <BasicTable rows={tickets} handleClick={handleOpenTicket} />

@@ -5,8 +5,8 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import apiService from '../services/apiService';
-import BasicModal from './BasicModal';
 import Chip from '@mui/material/Chip';
+import TicketModal from './TicketModal';
 
 export default function TicketCard({ projectTitle, ticketId }) {
   const [ticket, setTicket] = React.useState([])
@@ -75,9 +75,9 @@ export default function TicketCard({ projectTitle, ticketId }) {
           flexDirection: 'column',
         }}
       >
-        <BasicModal>
+        <TicketModal projectTitle={projectTitle}>
           Update
-        </BasicModal>
+        </TicketModal>
       </CardActions>
     </Card>
   );

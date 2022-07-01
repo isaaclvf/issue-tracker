@@ -42,7 +42,17 @@ const getUser = async (req, res) => {
   res.json(userObj)
 }
 
+const getUsers = async (req, res) => {
+  const users = await pool
+    .query(`
+      SELECT name, username FROM users
+    `)
+
+  res.json(users.rows)
+}
+
 module.exports = {
   createUser,
   getUser,
+  getUsers,
 }
