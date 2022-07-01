@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import apiService from '../services/apiService';
 import BasicTable from './BasicTable';
 import TicketCard from './TicketCard';
+import { Box } from '@mui/material';
+import BasicModal from './BasicModal';
 
 const activeTicket = ({ tickets, handleClick}) => {
   return (
@@ -38,17 +40,26 @@ const ProjectPage = ({ project, handleClick }) => {
 
   return(
     <>
-      <Button variant='outlined' size='small' 
-        onClick={handleClick} 
-      >
-        Go back
-      </Button>
-      <Typography variant="h5" component="div">
-        {project.title}
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        {project.description}
-      </Typography>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <Box>
+          <Button variant='outlined' size='small' 
+            onClick={handleClick} 
+          >
+            Go back
+          </Button>
+          <Typography variant="h5" component="div">
+            {project.title}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            {project.description}
+          </Typography>
+        </Box>
+        <BasicModal>Create new ticket</BasicModal>
+      </Box>
+
       <BasicTable rows={tickets} handleClick={handleOpenTicket} />
       {
         openTicket.open

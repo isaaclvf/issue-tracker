@@ -47,8 +47,6 @@ const createTicket = async (req, res) => {
     assignedUsers
   } = req.body
 
-  console.log(assignedUsers)
-
   // Check token
   const token = getTokenFrom(req)
   const decodedToken = jwt.verify(token, process.env.SECRET)

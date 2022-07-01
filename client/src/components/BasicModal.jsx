@@ -27,14 +27,14 @@ export default function BasicModal({ children }) {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="ticket-modal"
+        aria-describedby="ticket-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="ticket-modal" variant="h6" component="h2">
             {children === 'Update' ? 'Update ticket' : 'Open new ticket'}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography id="ticket-modal-description" sx={{ mt: 2 }}>
             Ticket Forms
           </Typography>
         </Box>

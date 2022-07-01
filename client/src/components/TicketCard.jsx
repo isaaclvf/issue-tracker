@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import apiService from '../services/apiService';
 import BasicModal from './BasicModal';
+import Chip from '@mui/material/Chip';
 
 export default function TicketCard({ projectTitle, ticketId }) {
   const [ticket, setTicket] = React.useState([])
@@ -37,26 +38,34 @@ export default function TicketCard({ projectTitle, ticketId }) {
         <Typography variant="h5" component="div">
           {ticket.title}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {ticket.open ? `Open ${ticket.type}` : `Closed ${ticket.type}`}
-        </Typography>
-        <Typography>
-          {ticket.description}
-        </Typography>
+        
+        <Chip 
+          variant="outlined" 
+          color="primary" 
+          label={ticket.open ? 'Open' : 'Closed'}
+          size='small'
+          sx={{marginRight: '0.5rem'}}
+        /> 
+        <Chip 
+          variant="outlined" 
+          color="primary" 
+          label={ticket.status_text}
+          size='small'
+        /> 
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           Submitted by {ticket.submittedBy ? ticket.submittedBy.name : 'unknown'}
           {', '} {formatDate(ticket.created_at)}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="">
+        <Typography>
+          {ticket.description}
+        </Typography>
+        <Typography sx={{ mt: '1rem' }} color="text.secondary">
           Assigned to {
             ticket.assignedUsers 
             ? ticket.assignedUsers.map(user => `${user.name} `) 
             : 'nobody'}
         </Typography>
-        <Typography>
-          {`Status: ${ticket.status_text}`}
-        </Typography>
-        <Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {`Last updated: ${formatDate(ticket.updated_at)}`}
         </Typography>
       </CardContent>
@@ -66,14 +75,6 @@ export default function TicketCard({ projectTitle, ticketId }) {
           flexDirection: 'column',
         }}
       >
-        {/* <Button size="medium"
-          variant='contained'
-          sx={{
-            marginTop: '1rem'
-          }}
-        >
-          Update
-        </Button> */}
         <BasicModal>
           Update
         </BasicModal>
