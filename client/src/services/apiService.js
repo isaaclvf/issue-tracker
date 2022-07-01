@@ -60,6 +60,13 @@ const getTicketInfo = async (projectTitle, ticketId) => {
   return parsedResponse
 }
 
+const getUsers = async () => {
+  const response = await fetch(`${baseUrl}/api/users`)
+  const parsedResponse = await response.json()
+
+  return parsedResponse
+}
+
 const apiService = {
   createUser,
   login,
@@ -67,6 +74,7 @@ const apiService = {
   getProjects,
   getTickets,
   getTicketInfo,
+  getUsers,
 }
 
 export default apiService
