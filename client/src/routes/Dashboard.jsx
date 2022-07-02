@@ -17,9 +17,23 @@ const Dashboard = () => {
 
   // Redirect if user is not logged in
   const token = localStorage.getItem('token')
+
+  const checkAuth = async () => {
+    const isAuth = await apiService.isAuth()
+    if (!isAuth) {
+      localStorage.clear()
+      return navigate('/login')
+    }
+    return
+  }
+
   useEffect(() => {
     if (!token) {
       return navigate('/login')
+    }
+
+    if (token) {
+      checkAuth()
     }
   }, [])
 
