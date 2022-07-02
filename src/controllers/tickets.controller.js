@@ -49,15 +49,15 @@ const createTicket = async (req, res) => {
 
   // Check token
   const token = getTokenFrom(req)
+  let decodedToken
 
   try {
-    const decodedToken = jwt.verify(token, process.env.SECRET)
+    decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!decodedToken) {
+      return res.status(401).json({ error: 'token missing or invalid' })
+    }
   } catch (err) {
     return res.status(401).json(err.message)
-  }
-
-  if (!decodedToken) {
-    return res.status(401).json({ error: 'token missing or invalid' })
   }
 
   // Check project
