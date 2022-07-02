@@ -4,7 +4,7 @@ const formatRoute = (str) => {
   return str
     .toLowerCase()
     .replace(re, '')
-    .replace(' ', '_')
+    .replaceAll(' ', '_')
 }
 
 const helpers = {
