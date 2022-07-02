@@ -31,6 +31,20 @@ const login = async (userObj) => {
   return parsedResponse
 }
 
+const isAuth = async () => {
+  const token = localStorage.getItem('token')
+
+  const response = await fetch(`${baseUrl}/api/login/auth`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+
+  const isAuth = !(response.status === 401)
+  return isAuth
+}
+
 const logout = () => {
   localStorage.clear()
 }
@@ -94,6 +108,7 @@ const apiService = {
   getTicketInfo,
   getUsers,
   createTicket,
+  isAuth,
 }
 
 export default apiService
