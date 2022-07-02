@@ -13,6 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { FormGroup } from '@mui/material';
 import apiService from '../services/apiService'
 import Autocomplete from '@mui/material/Autocomplete'
+import CircularProgress from '@mui/material/CircularProgress';
 
 const style = {
   position: 'absolute',
@@ -31,13 +32,13 @@ export default function TicketModal({ children, projectTitle }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [status, setStatus] = React.useState('')
+  const [status, setStatus] = React.useState('New')
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value)
   }
 
-  const [type, setType] = React.useState('')
+  const [type, setType] = React.useState('Issue')
 
   const handleTypeChange = (event) => {
     setType(event.target.value)
@@ -53,6 +54,15 @@ export default function TicketModal({ children, projectTitle }) {
   React.useEffect(() => { 
     handleUsers()
   }, [])
+
+  const [loading, setLoading] = React.useState(false)
+  const [editing, setEditing] = React.useState(children === 'Update')
+
+  const handleSubmit = () => {
+    setLoading(true)
+
+    const method = editing ? 'PUT' : 'POST'
+  }
 
   return (
     <FormGroup>
@@ -81,25 +91,29 @@ export default function TicketModal({ children, projectTitle }) {
             rows={4}
             sx={{ mb: '1rem', width: '100%' }}
           />
-          <FormControl fullWidth>
-            <InputLabel id="status-text-label">Status</InputLabel>
-            <Select
-              labelId="status-text-label"
-              id="status-text"
-              value={status}
-              label="Status"
-              onChange={handleStatusChange}
-              defaultValue={'New'}
-              sx={{ mb: '1rem' }}
-            >
-              <MenuItem value={'New'}>New</MenuItem>
-              <MenuItem value={'In Progress'}>In Progress</MenuItem>
-              <MenuItem value={'Resolved'}>Resolved</MenuItem>
-              <MenuItem value={'Feedback'}>Feedback</MenuItem>
-              <MenuItem value={'Closed'}>Closed</MenuItem>
-              <MenuItem value={'Rejected'}>Rejected</MenuItem>
-            </Select>
-          </FormControl>
+          {
+            editing
+            ? <FormControl fullWidth>
+              <InputLabel id="status-text-label">Status</InputLabel>
+              <Select
+                labelId="status-text-label"
+                id="status-text"
+                value={status}
+                label="Status"
+                onChange={handleStatusChange}
+                defaultValue={'New'}
+                sx={{ mb: '1rem' }}
+              >
+                <MenuItem value={'New'}>New</MenuItem>
+                <MenuItem value={'In Progress'}>In Progress</MenuItem>
+                <MenuItem value={'Resolved'}>Resolved</MenuItem>
+                <MenuItem value={'Feedback'}>Feedback</MenuItem>
+                <MenuItem value={'Closed'}>Closed</MenuItem>
+                <MenuItem value={'Rejected'}>Rejected</MenuItem>
+              </Select>
+            </FormControl>
+            : null
+          }
           <FormControl fullWidth>
             <InputLabel id="issue-type-label">Type</InputLabel>
             <Select
@@ -108,22 +122,42 @@ export default function TicketModal({ children, projectTitle }) {
               value={type}
               label="Type"
               onChange={handleTypeChange}
+              sx={{ mb: '1rem' }}
             >
               <MenuItem value={'Issue'}>Issue</MenuItem>
               <MenuItem value={'Feature Request'}>Feature Request</MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth>
-            <FormControlLabel control={<Checkbox />} label="Closed" sx={{ mb: '1rem' }} />
-          </FormControl>
+          {
+            editing
+            ? <FormControl fullWidth>
+              <FormControlLabel control={<Checkbox />} label="Closed" sx={{ mb: '1rem' }} />
+            </FormControl>
+            : null
+          }
           <Autocomplete
             multiple
             disablePortal
             id="assigned-users"
             options={users.map(u => u.name)}
-            sx={{ width: 300 }}
+            sx={{ width: '100%', mb: '1rem' }}
             renderInput={(params) => <TextField {...params} label="Assigned Users" />}
           />
+
+              <Button 
+                variant='contained' 
+                type='submit'
+                onClick={handleSubmit}
+              >
+                {
+                  loading 
+                    ? <CircularProgress
+                      color='inherit'
+                      size={24}
+                    /> 
+                    : 'Save'
+                }
+              </Button>
         </Box>
       </Modal>
     </FormGroup>
