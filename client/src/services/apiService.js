@@ -44,7 +44,6 @@ const getProjects = async () => {
 
 const getTickets = async (project) => {
   const projectRoute = helpers.formatRoute(project.title)
-
   const response = await fetch(`${baseUrl}/api/issues/${projectRoute}`)
   const parsedResponse = await response.json()
 
@@ -67,6 +66,25 @@ const getUsers = async () => {
   return parsedResponse
 }
 
+const createTicket = async (method, bodyObj, projectTitle) => {
+  const projectRoute = helpers.formatRoute(projectTitle)
+
+  const token = localStorage.getItem('token')
+
+  const response = await fetch(`${baseUrl}/api/issues/${projectRoute}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(bodyObj)
+  })
+
+  const parsedResponse = await response.json()
+
+  return parsedResponse
+}
+
 const apiService = {
   createUser,
   login,
@@ -75,6 +93,7 @@ const apiService = {
   getTickets,
   getTicketInfo,
   getUsers,
+  createTicket,
 }
 
 export default apiService
