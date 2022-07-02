@@ -42,14 +42,19 @@ const createTicket = async (req, res) => {
     title,
     description,
     type,
-    status_text,
+    statusText,
     open,
     assignedUsers
   } = req.body
 
   // Check token
   const token = getTokenFrom(req)
-  const decodedToken = jwt.verify(token, process.env.SECRET)
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+  } catch (err) {
+    return res.status(401).json(err.message)
+  }
 
   if (!decodedToken) {
     return res.status(401).json({ error: 'token missing or invalid' })
@@ -74,7 +79,7 @@ const createTicket = async (req, res) => {
       (project_id, title, description, type, status_text, open)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *
-    `, [projectId, title, description, type, status_text, open])
+    `, [projectId, title, description, type, statusText, open])
 
   const ticketObj = ticketQuery.rows[0]
 
