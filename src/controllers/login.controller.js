@@ -1,6 +1,7 @@
 const pool = require('../db')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { getTokenFrom } = require('../utils/helpers')
 
 const loginUser = async (req, res) => {
   const { username, password } = req.body
@@ -40,6 +41,23 @@ const loginUser = async (req, res) => {
     .send({ token, username: userObj.username, name: userObj.name })
 }
 
+const isAuth = async (req, res) => {
+  // Check token
+  const token = getTokenFrom(req)
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!decodedToken) {
+      return res.status(401).json({ error: 'token missing or invalid' })
+    }
+  } catch (err) {
+    return res.status(401).json(err.message)
+  }
+
+  return res.status(200)
+}
+
 module.exports = {
   loginUser,
+  isAuth,
 }
