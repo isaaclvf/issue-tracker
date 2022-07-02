@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+require('express-async-errors')
 
 const projectRouter = require('./routes/projects.routes')
 const usersRouter = require('./routes/users.routes')
