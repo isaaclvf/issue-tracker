@@ -10,9 +10,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import navbarItems from './navbarItems';
-import LogoutDialog from './LogoutDialog';
 import Link from '@mui/material/Link'
 import { Typography } from '@mui/material';
+import BasicDialog from './BasicDialog';
+import { useNavigate } from 'react-router-dom';
+import apiService from '../services/apiService';
 
 export default function TempNavbar() {
   const [state, setState] = React.useState({
@@ -21,6 +23,13 @@ export default function TempNavbar() {
     bottom: false,
     right: false,
   });
+
+  const navigate = useNavigate()
+  
+  const logout = () => {
+    apiService.logout()
+    navigate('/login')
+  }
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -76,7 +85,9 @@ export default function TempNavbar() {
           ))}
         </List>
       <Divider />
-      <LogoutDialog />
+      <BasicDialog action={logout} buttonMsg='Logout'>
+          Are you sure you want to log out?
+      </BasicDialog>
     </Box>
   );
 

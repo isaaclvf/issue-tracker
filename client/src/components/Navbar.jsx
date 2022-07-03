@@ -9,11 +9,20 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Typography } from '@mui/material';
 import navbarItems from './navbarItems';
-import LogoutDialog from './LogoutDialog';
+import BasicDialog from './BasicDialog';
+import { useNavigate } from 'react-router-dom'
+import apiService from '../services/apiService';
 
 const drawerWidth = 240;
 
 const Navbar = () => {
+  const navigate = useNavigate()
+
+  const logout = () => {
+    apiService.logout()
+    navigate('/login')
+  }
+
   return (
       <Drawer
         sx={{
@@ -68,7 +77,9 @@ const Navbar = () => {
           ))}
         </List>
         <Divider />
-        <LogoutDialog/>
+        <BasicDialog action={logout} buttonMsg='Logout'>
+          Are you sure you want to log out?
+        </BasicDialog>
       </Drawer>
   )
 }

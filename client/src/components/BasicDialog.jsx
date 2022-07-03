@@ -3,13 +3,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import apiService from '../services/apiService';
 import Box from '@mui/material/Box'
-import { useNavigate } from 'react-router-dom';
 
-export default function LogoutDialog() {
+export default function BasicDialog({ action, children, buttonMsg }) {
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate()
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,9 +16,8 @@ export default function LogoutDialog() {
     setOpen(false);
   };
 
-  const handleLogout = () => {
-    apiService.logout()
-    navigate('/login')
+  const handleAction = () => {
+    action()
   }
 
   return (
@@ -45,12 +41,12 @@ export default function LogoutDialog() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Are you sure you want to logout?"}
+          {children}
         </DialogTitle>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleLogout} autoFocus>
-            Logout
+          <Button onClick={handleAction} autoFocus>
+            {buttonMsg}
           </Button>
         </DialogActions>
       </Dialog>
