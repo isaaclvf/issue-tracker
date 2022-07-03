@@ -7,20 +7,10 @@ import TicketCard from './TicketCard';
 import { Box } from '@mui/material';
 import TicketModal from './TicketModal';
 
-const activeTicket = ({ tickets, handleClick}) => {
-  return (
-    <>
-      {
-        tickets.find()
-      }
-    </>
-  )
-}
-
 const ProjectPage = ({ project, handleClick }) => {
   const [tickets, setTickets] = React.useState([]) 
   
-  const handleProject = async () => {
+  const loadProject = async () => {
     const result = await apiService.getTickets(project)
     setTickets(result)
   }
@@ -35,8 +25,12 @@ const ProjectPage = ({ project, handleClick }) => {
   }
 
   React.useEffect(() => {
-    handleProject()
+    loadProject()
   }, [])
+
+  const reloadProject = () => {
+    loadProject()
+  }
 
   return(
     <>
@@ -57,7 +51,12 @@ const ProjectPage = ({ project, handleClick }) => {
             {project.description}
           </Typography>
         </Box>
-        <TicketModal>Create new ticket</TicketModal>
+        <TicketModal 
+          projectTitle={project.title}
+          reload={reloadProject}
+        >
+          New
+        </TicketModal>
       </Box>
 
       <BasicTable rows={tickets} handleClick={handleOpenTicket} />
@@ -66,6 +65,7 @@ const ProjectPage = ({ project, handleClick }) => {
         ? <TicketCard 
             projectTitle={project.title} 
             ticketId={openTicket.id} 
+            reloadProject={reloadProject}
           />
         : null
       }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -27,41 +27,110 @@ const style = {
   p: 4,
 };
 
-export default function TicketModal({ children, projectTitle }) {
-  const [open, setOpen] = React.useState(false);
+export default function TicketModal({ children, projectTitle, ticketId, reload }) {
+  // This refers to if the modal is open or not
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [status, setStatus] = React.useState('New')
+  // For the loading button
+  const [loading, setLoading] = useState(false)
+
+  // Change some options based on if you are editing or creating tickets
+  const [editing, setEditing] = useState(false)
+
+  // Get users to fill the autocomplete form
+  const [availableUsers, setAvailableUsers] = useState([])
+
+  const handleAvailableUsers = async () => {
+    const result = await apiService.getUsers()
+    setAvailableUsers(result)
+  }
+
+  useEffect(() => { 
+    handleAvailableUsers()
+  }, [])
+
+  // Information needed to create or edit the ticket
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [status, setStatus] = useState('New')
+  const [type, setType] = useState('Bug')
+  const [closedTicket, setClosedTicket] = useState(false)
+  const [assignedUsers, setAssignedUsers] = useState([])
+  
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value)
+  }
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value)
+  }
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value)
   }
 
-  const [type, setType] = React.useState('Issue')
-
   const handleTypeChange = (event) => {
     setType(event.target.value)
   }
 
-  const [users, setUsers] = React.useState([])
-
-  const handleUsers = async () => {
-    const result = await apiService.getUsers()
-    setUsers(result)
+  const handleClosedChange = (event) => {
+    setClosedTicket(event.target.checked)
   }
 
-  React.useEffect(() => { 
-    handleUsers()
-  }, [])
+  const handleAssignedChange = (event, value) => {
+    setAssignedUsers(value)
+  }
 
-  const [loading, setLoading] = React.useState(false)
-  const [editing, setEditing] = React.useState(children === 'Update')
+  // Load ticket information so it can be edited
+  const loadTicket = async (projectTitle, ticketId) => {
+    if (!ticketId) return
 
-  const handleSubmit = () => {
+    const ticket = await apiService.getTicketInfo(projectTitle, ticketId)
+    setEditing(true)
+
+    setTitle(ticket.title)
+    setDescription(ticket.description)
+    setStatus(ticket.status_text)
+    setType(ticket.type)
+    setClosedTicket(!ticket.open)
+    setAssignedUsers(ticket.assignedUsers)
+  }
+
+  useEffect(() => { 
+    loadTicket(projectTitle, ticketId)
+  }, [ticketId])
+
+
+  // Send request
+  const handleSubmit = async () => {
     setLoading(true)
 
     const method = editing ? 'PUT' : 'POST'
+
+    const formObj = {
+      title,
+      description,
+      type,
+      statusText: status,
+      open: !closedTicket,
+      assignedUsers,
+    }
+
+    const id = editing ? ticketId : ''
+
+    await apiService.saveTicket(method, formObj, projectTitle, id)
+    
+    if (editing) {
+      reload()
+      setLoading(false)
+      setOpen(false)
+    }
+
+    reload()
+    setLoading(false)
+    setOpen(false)
   }
 
   return (
@@ -82,6 +151,8 @@ export default function TicketModal({ children, projectTitle }) {
             label="Title" 
             variant="outlined" 
             sx={{ mt: '1rem', mb: '1rem', width: '100%' }}
+            defaultValue={title}
+            onChange={handleTitleChange}
           />
           <TextField 
             id="description-title" 
@@ -90,6 +161,8 @@ export default function TicketModal({ children, projectTitle }) {
             multiline
             rows={4}
             sx={{ mb: '1rem', width: '100%' }}
+            defaultValue={description}
+            onChange={handleDescriptionChange}
           />
           {
             editing
@@ -101,7 +174,7 @@ export default function TicketModal({ children, projectTitle }) {
                 value={status}
                 label="Status"
                 onChange={handleStatusChange}
-                defaultValue={'New'}
+                defaultValue={status}
                 sx={{ mb: '1rem' }}
               >
                 <MenuItem value={'New'}>New</MenuItem>
@@ -122,16 +195,25 @@ export default function TicketModal({ children, projectTitle }) {
               value={type}
               label="Type"
               onChange={handleTypeChange}
+              defaultValue={type}
               sx={{ mb: '1rem' }}
             >
-              <MenuItem value={'Issue'}>Issue</MenuItem>
+              <MenuItem value={'Bug'}>Bug</MenuItem>
               <MenuItem value={'Feature Request'}>Feature Request</MenuItem>
             </Select>
           </FormControl>
           {
             editing
             ? <FormControl fullWidth>
-              <FormControlLabel control={<Checkbox />} label="Closed" sx={{ mb: '1rem' }} />
+              <FormControlLabel 
+                control={
+                  <Checkbox 
+                    onChange={handleClosedChange}
+                    checked={closedTicket}
+                  />
+                } 
+                label="Closed" 
+                sx={{ mb: '1rem' }} />
             </FormControl>
             : null
           }
@@ -139,15 +221,17 @@ export default function TicketModal({ children, projectTitle }) {
             multiple
             disablePortal
             id="assigned-users"
-            options={users.map(u => u.name)}
+            options={availableUsers.map(u => u.username)}
             sx={{ width: '100%', mb: '1rem' }}
             renderInput={(params) => <TextField {...params} label="Assigned Users" />}
+            onChange={handleAssignedChange}
           />
 
               <Button 
                 variant='contained' 
                 type='submit'
                 onClick={handleSubmit}
+                disabled={!title || !description}
               >
                 {
                   loading 
