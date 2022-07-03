@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box'
 
-export default function BasicDialog({ action, children, buttonMsg }) {
+export default function BasicDialog({ action, children, buttonMsg, sx }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -28,11 +28,9 @@ export default function BasicDialog({ action, children, buttonMsg }) {
       }}
     >
       <Button variant="outlined" color="error" onClick={handleClickOpen}
-        sx={{
-          width: '100%'
-        }}
+        sx={sx}
       >
-        Logout
+        {buttonMsg}
       </Button>
       <Dialog
         open={open}

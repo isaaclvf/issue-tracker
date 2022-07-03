@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography';
 import apiService from '../services/apiService';
 import Chip from '@mui/material/Chip';
 import TicketModal from './TicketModal';
+import BasicDialog from './BasicDialog';
 
-export default function TicketCard({ projectTitle, ticketId, reloadProject }) {
+export default function TicketCard({ projectTitle, ticketId }) {
   const [ticket, setTicket] = React.useState([])
 
   const loadTicket = async (projectTitle, ticketId) => {
@@ -22,7 +23,8 @@ export default function TicketCard({ projectTitle, ticketId, reloadProject }) {
   const formatDate = (date) => {
     const dateObj = new Date(date)
     const dateStr = dateObj.toString()
-    return dateStr.slice(4, 21) // Only shows something like 'Jun 19 2022 16:03'
+    // Only shows something like 'Jan 01 2000 00:00'
+    return dateStr.slice(4, 21) 
   }
 
   const reloadTicket = () => {
@@ -91,6 +93,14 @@ export default function TicketCard({ projectTitle, ticketId, reloadProject }) {
         >
           Update
         </TicketModal>
+        <BasicDialog 
+          buttonMsg={'Delete'}
+          action={() => console.log('delete')}
+          sx={{ mb: '1rem' }}
+        >
+          Are you sure you want to delete this ticket?
+          This action cannot be undone.
+        </BasicDialog>
       </CardActions>
     </Card>
   );

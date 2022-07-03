@@ -9,7 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
-import navbarItems from './navbarItems';
+import navbarItems from './constants/navbarItems';
 import Link from '@mui/material/Link'
 import { Typography } from '@mui/material';
 import BasicDialog from './BasicDialog';
@@ -85,8 +85,10 @@ export default function TempNavbar() {
           ))}
         </List>
       <Divider />
-      <BasicDialog action={logout} buttonMsg='Logout'>
-          Are you sure you want to log out?
+      <BasicDialog action={logout} buttonMsg='Logout'
+        sx={{ width: '100%' }}
+      >
+        Are you sure you want to log out?
       </BasicDialog>
     </Box>
   );

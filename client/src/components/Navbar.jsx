@@ -8,7 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Typography } from '@mui/material';
-import navbarItems from './navbarItems';
+import navbarItems from './constants/navbarItems';
 import BasicDialog from './BasicDialog';
 import { useNavigate } from 'react-router-dom'
 import apiService from '../services/apiService';
@@ -77,7 +77,9 @@ const Navbar = () => {
           ))}
         </List>
         <Divider />
-        <BasicDialog action={logout} buttonMsg='Logout'>
+        <BasicDialog action={logout} buttonMsg='Logout'
+          sx={{ width: '100%' }}
+        >
           Are you sure you want to log out?
         </BasicDialog>
       </Drawer>
