@@ -99,6 +99,20 @@ const saveTicket = async (method, bodyObj, projectTitle, id) => {
   return parsedResponse
 }
 
+const getAssignments = async (username) => {
+  const response = await fetch(`${baseUrl}/api/assigned_to/${username}`)
+  const parsedResponse = await response.json()
+
+  return parsedResponse
+}
+
+const getSubmissions = async (username) => {
+  const response = await fetch(`${baseUrl}/api/submitted_by/${username}`)
+  const parsedResponse = await response.json()
+
+  return parsedResponse
+}
+
 const apiService = {
   createUser,
   login,
@@ -109,6 +123,8 @@ const apiService = {
   getUsers,
   saveTicket,
   isAuth,
+  getAssignments,
+  getSubmissions,
 }
 
 export default apiService
