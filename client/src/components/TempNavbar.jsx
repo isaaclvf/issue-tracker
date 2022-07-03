@@ -67,20 +67,14 @@ export default function TempNavbar() {
       <List>
           {navbarItems.map(item => (
             <ListItem key={item.id} disablePadding>
-              <Link
-                sx={{
-                  textDecoration: 'none',
-                  color: 'black'
-                }}
-                href={item.link}
-              >
-                <ListItemButton sx={{ width: '239px', padding: 'auto' }}>
+                <ListItemButton sx={{ width: '239px', padding: 'auto' }}
+                  onClick={() => navigate(item.link)}
+                >
                   <ListItemIcon>
                     {item.icon}
                   </ListItemIcon>
                   <ListItemText primary={item.text} sx={{marginLeft: '-25px'}}/>
                 </ListItemButton>
-              </Link>
             </ListItem>
           ))}
         </List>
