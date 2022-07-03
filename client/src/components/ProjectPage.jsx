@@ -33,17 +33,18 @@ const ProjectPage = ({ project, handleClick }) => {
   }
 
   return(
-    <>
+    <Box sx={{ mt: '-2rem' }}>
+      <Button variant='outlined' size='small' 
+        onClick={handleClick} 
+      >
+        Go back
+      </Button>
       <Box sx={{
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        mt: '1rem'
       }}>
         <Box>
-          <Button variant='outlined' size='small' 
-            onClick={handleClick} 
-          >
-            Go back
-          </Button>
           <Typography variant="h5" component="div">
             {project.title}
           </Typography>
@@ -69,7 +70,7 @@ const ProjectPage = ({ project, handleClick }) => {
           />
         : null
       }
-    </>
+    </Box>
   )
 }
 

@@ -48,7 +48,6 @@ const Navbar = () => {
           }}
           href='/dashboard'
         >
-
           <Typography
             variant='h5'
           >
@@ -59,20 +58,14 @@ const Navbar = () => {
         <List>
           {navbarItems.map(item => (
             <ListItem key={item.id} disablePadding>
-              <Link
-                sx={{
-                  textDecoration: 'none',
-                  color: 'black'
-                }}
-                href={item.link}
+              <ListItemButton sx={{ width: '239px', padding: 'auto' }}
+                onClick={() => navigate(item.link)}
               >
-                <ListItemButton sx={{ width: '239px', padding: 'auto' }}>
-                  <ListItemIcon>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.text} sx={{marginLeft: '-25px'}}/>
-                </ListItemButton>
-              </Link>
+                <ListItemIcon>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} sx={{marginLeft: '-25px'}}/>
+              </ListItemButton>
             </ListItem>
           ))}
         </List>

@@ -6,7 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import BasicMenu from './BasicMenu';
 
 const NotificationBell = ({ notifications, handleOpen, handleClose, anchorEl, open }) => {
-  notifications = ['Foo', 'Bar', 'Baz']
+  notifications = []
   const badgeContent = notifications.length
 
   const newNotifications = `You have ${badgeContent} new notifications`

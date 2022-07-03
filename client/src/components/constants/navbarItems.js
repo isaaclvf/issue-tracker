@@ -7,17 +7,17 @@ const navbarItems = [
     id: 0,
     text: 'Projects',
     icon: <DashboardIcon />,
-    link: '#'
+    link: '/dashboard'
   }, {
     id: 1,
     text: 'Assigned to me',
     icon: <AssignmentIcon />,
-    link: '#'
+    link: '/assignmed'
   }, {
     id: 2,
     text: 'Submitted by me',
     icon: <BugReportIcon />,
-    link: '#'
+    link: '/submitted'
   },
 ]
 
