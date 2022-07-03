@@ -12,7 +12,7 @@ const navbarItems = [
     id: 1,
     text: 'Assigned to me',
     icon: <AssignmentIcon />,
-    link: '/assignmed'
+    link: '/assigned'
   }, {
     id: 2,
     text: 'Submitted by me',
