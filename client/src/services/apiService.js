@@ -80,12 +80,12 @@ const getUsers = async () => {
   return parsedResponse
 }
 
-const createTicket = async (method, bodyObj, projectTitle) => {
+const saveTicket = async (method, bodyObj, projectTitle, id) => {
   const projectRoute = helpers.formatRoute(projectTitle)
 
   const token = localStorage.getItem('token')
 
-  const response = await fetch(`${baseUrl}/api/issues/${projectRoute}`, {
+  const response = await fetch(`${baseUrl}/api/issues/${projectRoute}/${id}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ const apiService = {
   getTickets,
   getTicketInfo,
   getUsers,
-  createTicket,
+  saveTicket,
   isAuth,
 }
 

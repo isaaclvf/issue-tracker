@@ -108,7 +108,7 @@ const createTicket = async (req, res) => {
 
 const updateTicket = async (req, res) => {
   const ticketId = req.params.id
-  const { title, description, type, status_text, open } = req.body
+  const { title, description, type, statusText, open } = req.body
 
   const result = await pool
     .query(`
@@ -116,7 +116,7 @@ const updateTicket = async (req, res) => {
       SET title = $1, description = $2, type = $3, status_text = $4, open = $5
       WHERE id = $6
       RETURNING *
-    `, [title, description, type, status_text, open, ticketId])
+    `, [title, description, type, statusText, open, ticketId])
 
   res.json(result.rows[0])
 }
