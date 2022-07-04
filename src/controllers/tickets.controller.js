@@ -138,13 +138,14 @@ const getSubmissions = async (req, res) => {
 
   const ticketsQuery = await pool
     .query(`
-      SELECT * FROM tickets WHERE id in
+      SELECT tickets.*, projects.route FROM tickets, projects WHERE tickets.id in
       (
         SELECT ticket_id FROM submitted_by WHERE user_id = 
         (
           SELECT id FROM users WHERE username = $1
         )
       )
+      AND tickets.project_id = projects.id
     `, [username])
 
   if (ticketsQuery.rowCount === 0) {
@@ -159,13 +160,14 @@ const getAssignments = async (req, res) => {
 
   const ticketsQuery = await pool
     .query(`
-      SELECT * FROM tickets WHERE id in
+      SELECT tickets.*, projects.route FROM tickets, projects WHERE tickets.id in
       (
         SELECT ticket_id FROM assigned_to WHERE user_id = 
         (
           SELECT id FROM users WHERE username = $1
         )
       )
+      AND tickets.project_id = projects.id
     `, [username])
 
   if (ticketsQuery.rowCount === 0) {
