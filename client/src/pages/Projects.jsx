@@ -1,7 +1,8 @@
 import React from 'react'
-import { useState } from 'react';
-import ProjectCard from './ProjectCard';
-import ProjectPage from './ProjectPage';
+import { useState, useEffect } from 'react';
+import apiService from '../services/apiService';
+import ProjectCard from '../components/ProjectCard';
+import ProjectPage from '../components/ProjectPage';
 
 const ProjectList = ({ projects, handleClick }) => {
   return (
@@ -17,7 +18,18 @@ const ProjectList = ({ projects, handleClick }) => {
   )
 }
 
-const MainBody = ({ projects }) => {
+const Projects = () => {
+  const [projects, setProjects] = useState([]) 
+  
+  const handleProjects = async () => {
+    const result = await apiService.getProjects()
+    setProjects(result)
+  }
+
+  useEffect(() => {
+    handleProjects()
+  }, [])
+
   const [openProject, setOpenProject] = useState({open: false, id: null})
 
   const handleOpenProject = (id = null) => {
@@ -41,4 +53,4 @@ const MainBody = ({ projects }) => {
   )
 }
 
-export default MainBody
+export default Projects

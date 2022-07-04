@@ -44,6 +44,8 @@ export default function Login() {
 
     localStorage.setItem('token', result.token)
     localStorage.setItem('name', result.name)
+    localStorage.setItem('username', result.username)
+
     navigate('/dashboard')
   };
 

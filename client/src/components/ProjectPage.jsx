@@ -33,7 +33,7 @@ const ProjectPage = ({ project, handleClick }) => {
   }
 
   return(
-    <Box sx={{ mt: '-2rem' }}>
+    <Box sx={{ mt: '-1rem' }}>
       <Button variant='outlined' size='small' 
         onClick={handleClick} 
       >
