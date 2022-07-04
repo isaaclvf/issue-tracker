@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 require('express-async-errors')
+const path = require('path')
 
 const projectRouter = require('./routes/projects.routes')
 const usersRouter = require('./routes/users.routes')
@@ -12,6 +13,8 @@ const { getAssignments, getSubmissions } = require('./controllers/tickets.contro
 const middleware = require('./utils/middleware')
 
 const app = express()
+
+app.use(express.static(path.join(__dirname, 'build')))
 
 app.use(cors())
 app.use(express.json())
