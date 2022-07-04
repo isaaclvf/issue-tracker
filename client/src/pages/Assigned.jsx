@@ -12,6 +12,10 @@ const Assigned = () => {
     setTickets(result)
   }
 
+  useEffect(() => {
+    loadTickets()
+  }, [])
+
   const [openTicket, setOpenTicket] = useState({open: false, id: null})
 
   const handleOpenTicket = (id = null) => {
@@ -21,10 +25,6 @@ const Assigned = () => {
     })
   }
 
-  useEffect(() => {
-    loadTickets()
-  }, [])
-
   return (
     <>
       <BasicTable rows={tickets} handleClick={handleOpenTicket} />
@@ -32,6 +32,7 @@ const Assigned = () => {
         openTicket.open
         ? <TicketCard 
             ticketId={openTicket.id} 
+            projectTitle={tickets.find(ticket => ticket.id === openTicket.id).route}
           />
         : null
       }
