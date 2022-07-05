@@ -4,11 +4,10 @@ const { db_info } = require('./config')
 const { database, host, password, port, user } = db_info
 
 const pool = new Pool({
-  user,
-  password,
-  host,
-  port,
-  database,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 })
 
 module.exports = pool
