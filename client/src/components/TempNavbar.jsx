@@ -10,7 +10,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import navbarItems from './constants/navbarItems';
-import Link from '@mui/material/Link'
 import { Typography } from '@mui/material';
 import BasicDialog from './BasicDialog';
 import { useNavigate } from 'react-router-dom';
@@ -46,7 +45,7 @@ export default function TempNavbar() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <Link
+      <Box
           sx={{
             display: 'flex',
             justifyContent: 'left',
@@ -62,7 +61,7 @@ export default function TempNavbar() {
           >
             Issue Tracker
           </Typography>
-        </Link>
+        </Box>
         <Divider />
       <List>
           {navbarItems.map(item => (

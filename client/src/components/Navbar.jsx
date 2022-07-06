@@ -1,6 +1,6 @@
 import React from 'react'
 import Drawer from '@mui/material/Drawer';
-import Link from '@mui/material/Link'
+import Box from '@mui/material/Box'
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -38,7 +38,7 @@ const Navbar = () => {
         variant="permanent"
         anchor="left"
       >
-        <Link
+        <Box
           sx={{
             display: 'flex',
             justifyContent: 'left',
@@ -53,7 +53,7 @@ const Navbar = () => {
           >
             Issue Tracker
           </Typography>
-        </Link>
+        </Box>
         <Divider />
         <List>
           {navbarItems.map(item => (
