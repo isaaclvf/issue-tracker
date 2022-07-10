@@ -11,6 +11,7 @@ import apiService from '../services/apiService'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react';
+import WelcomeAlert from '../components/WelcomeAlert';
 
 const theme = createTheme();
 
@@ -61,10 +62,11 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Login
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <WelcomeAlert />
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
