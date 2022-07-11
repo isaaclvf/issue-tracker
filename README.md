@@ -1,6 +1,6 @@
 # Issue tracker
 
-This app is intended to be used as an internal tool for a company in product development. With it, users can collaborate on projects by viewing, creating, and updating issues.
+This app is intended to be used as an internal tool for a company during product development. With it, users can collaborate on projects by viewing, creating, and updating issues.
 
 You can check out the live demo [here](https://issue-tracker-demo.herokuapp.com).
 
