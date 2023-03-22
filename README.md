@@ -2,8 +2,6 @@
 
 This app is intended to be used as an internal tool for a company during product development. With it, users can collaborate on projects by viewing, creating, and updating issues.
 
-You can check out the live demo [here](https://issue-tracker-demo.herokuapp.com).
-
 ## About The Project
 My goal for this project was to learn more about modern web development with JavaScript. Here I built a Node.js API inspired by [this one](https://issue-tracker.freecodecamp.rocks/), and added some features: 
 - Connection with a PostgreSQL database
